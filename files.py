@@ -23,7 +23,7 @@ def files(day):
                     print(( str(index) + '-'+ '   '+time.ctime(os.path.getctime(root+'/'+ file)) +'     File Name :' +file +'\n'))
    
 
-days_input = input("Inser duration in day : ")
+days_input = input("Inser duration in day to be check : ") #it will check for last inserted day(s)
 files(days_input)
 
 
