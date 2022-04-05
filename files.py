@@ -4,28 +4,28 @@ from sys import stdin
 import time
 import os
  
-
 def files(day):
-     
-    dirs_tocheck=['folder1', 'folder2']  
-    daycount = time.time()-(float(day)*24*60*60)   
+    
+    os.chdir('/mnt/shareddisk/sftp/data/nokia')
+    dirs_tocheck=['bc', 'folder2']
+ 
+  
+    daycount = time.time()-(float(day)*24*60*60)    
 
-    for root, dirs, files in os.walk(os.getcwd()): 
+    for root, dirs, files in os.walk(os.getcwd()):  
         
         #check folders
         if os.path.basename(root) in dirs_tocheck:
-            print(90*'_')
-            print('Folder :'+ os.path.basename(root)+'\n')
+            print(80*'_'+'\n')
+            print(30*':'+'  NE TYPE is  '+ (os.path.basename(root).upper())+'  '+30*':'+'\n')
             # check files
             for index,file in enumerate(files):
                 # get details
+               
                 if os.path.getctime(root+'/'+ file) > daycount :
-                    print(( str(index) + '-'+ '   '+time.ctime(os.path.getctime(root+'/'+ file)) +'     File Name :' +file +'\n'))
-   
-
-days_input = input("Inser duration in day to be check : ") #it will check for last inserted day(s), ex: last 3 days from today
-files(days_input)
-
-
-
+                     
+                    print(( ' -' +'Number of files: ' + file  + '     - Last Received date: '+ time.ctime(os.path.getctime(root+'/'+ file)) ))
+    print(25*':'+ 'CHECKING IS DONE FOR LAST {}  DAY(S) !'.format(day) +25*':')    
  
+days_input = input("Inser duration in day, hit ENTER for 7 DAYS : ")
+files(7 if days_input=='' else days_input)
