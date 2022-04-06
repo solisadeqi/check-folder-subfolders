@@ -83,9 +83,9 @@ class colors: # You may need to change color settings
 
 def files(day):
     
-    os.chdir('/mnt/shareddisk/sftp/data/nokia')
-    # dirs_tocheck=['folder3', 'folder1', 'folder2']
-    dirs_tocheck=['hss', 'cbam', 'ASBC', 'mmtel', 'aaa', 'sgx', 'cm_repo', 'stp', 'ntas', 'NATREF_New', 'mrf', 'sdl', 'mss', 'cfx', 'NLS_PCAP' ]
+#     os.chdir('/home/usr')
+    dirs_tocheck=['folder3', 'folder1', 'folder2']
+     
  
     daycount = time.time()-(int(day)*24*60*60)
     #start checking
