@@ -1,4 +1,4 @@
-  
+ 
 from genericpath import getmtime
 import time
 import os
@@ -29,16 +29,7 @@ class colors:
     BCyan="\033[1;36m"        # Cyan
     BWhite="\033[1;37m"       # White
 
-    # Underline
-    UBlack="\033[4;30m"       # Black
-    URed="\033[4;31m"         # Red
-    UGreen="\033[4;32m"       # Green
-    UYellow="\033[4;33m"      # Yellow
-    UBlue="\033[4;34m"        # Blue
-    UPurple="\033[4;35m"      # Purple
-    UCyan="\033[4;36m"        # Cyan
-    UWhite="\033[4;37m"       # White
-
+ 
     # Background
     On_Black="\033[40m"       # Black
     On_Red="\033[41m"         # Red
@@ -47,7 +38,6 @@ class colors:
     On_Blue="\033[44m"        # Blue
     On_Purple="\[\033[45m"      # Purple
     On_Cyan="\033[46m"        # Cyan
-    On_White="\033[47m"       # White
 
     # High Intensty
     IBlack="\033[0;90m"       # Black
@@ -57,7 +47,6 @@ class colors:
     IBlue="\033[0;94m"        # Blue
     IPurple="\033[0;95m"      # Purple
     ICyan="\033[0;96m"        # Cyan
-    IWhite="\033[0;97m"       # White
 
     # Bold High Intensty
     BIBlack="\033[1;90m"      # Black
@@ -67,7 +56,6 @@ class colors:
     BIBlue="\033[1;94m"       # Blue
     BIPurple="\033[1;95m"     # Purple
     BICyan="\033[1;96m"       # Cyan
-    BIWhite="\033[1;97m"      # White
 
     # High Intensty backgrounds
     On_IBlack="\033[0;100m"   # Black
@@ -77,16 +65,20 @@ class colors:
     On_IBlue="\033[0;104m"    # Blue
     On_IPurple="\033[10;95m"  # Purple
     On_ICyan="\033[0;106m"    # Cyan
-    On_IWhite="\033[0;107m"   # White
 
- 
+
+dirs_tocheck={    
+    'folder1'  :'Folder1 Name',
+    'folder2'  :'Folder2 Name',
+    'folder3'  :'Folder3 Name',
+}
+
 
 def files(day):
     print(day)
     try:
-        os.chdir('/home/subfolder')
-        dirs_tocheck=['folder3', 'folder1', 'folder2']
-    
+        # os.chdir('/home/target/folder')
+         
         daycount = time.time()-(float(day)*24*60*60)
         #start checking
         brief_report_list =[]
@@ -107,45 +99,49 @@ def files(day):
                         
                         print(( colors.Blue +' File Name: ' + colors.off + colors.BGreen +file  + colors.off+ '      '+ colors.Purple +'Last Received date: '+ colors.off+ colors.BCyan+ time.ctime(os.path.getctime(root+'/'+ file)) +colors.off ))
                         # status of backup
-                        status_backup_pre = status_backup if file_count !=0 else status_backup_pre
-
-                        brief_report_dic['ne-type']   = os.path.basename(root).upper()
-                        brief_report_dic['file-count']=  str(file_count)
-                        brief_report_dic['status']    =  status_backup_pre
+                          
+                    brief_report_dic['ne-type']   = os.path.basename(root)
+                    brief_report_dic['file-count']=  str(file_count)
+                    brief_report_dic['status']    =  status_backup if file_count !=0 else status_backup_pre
+                brief_report_list.append(brief_report_dic)
 
                 print('\n')
-                print( colors.Red +'  NE Type     :  '+ colors.off+ colors.BIRed + os.path.basename(root).upper()+ colors.off)
-                print( colors.Red +'  File Counts :  '+ colors.off+ colors.BIRed + str(file_count) + colors.off )
-                print( colors.Red +'  Status      :  '+ colors.off+ colors.BIRed +  str( status_backup_pre ) + colors.off +' '+ colors.On_Blue + str('LAST UPDATE ' if file_count==0 else '') + colors.off +'\n')    
-
+                print( colors.Red +'  NE Type-     :  '+ colors.off+ colors.BIRed + dirs_tocheck[os.path.basename(root)] + colors.off)
+                print( colors.Red +'  File Counts- :  '+ colors.off+ colors.BIRed + str(file_count) + colors.off )
+                print( colors.Red +'  Status-      :  '+ colors.off+ colors.BIRed +  str( status_backup_pre ) + colors.off +' '+ colors.On_Blue + str('LAST UPDATE ' if file_count==0 else '') + colors.off +'\n')    
+                
+                # print( brief_report_dic )
+                # print( brief_report_list )
                 # add to list
-                brief_report_list.append(brief_report_dic) 
+                 
             
 
         # brief report
         print(60*':')
         print('\n')
 
-        print(' '+colors.On_Blue + str(20*' ') + colors.off +  colors.BBlue + ' Brif Report '+ colors.off + colors.On_Blue+ 20*' '+colors.off )
+        print(' '+colors.On_Blue + str(20*' ') + colors.off +  colors.BBlue + ' Brief Report '+ colors.off + colors.On_Blue+ 20*' '+ colors.off )
         print('\n')    
         for bReport in  brief_report_list:
+            # print(brief_report_list)
+            # print(brief_report_dic)
             if len(bReport) !=0 :
-                print( colors.Red +  '    NE Type       :  ' + bReport['ne-type'] +colors.off )         
-                print( colors.Green +'    File Counts   :  ' + bReport['file-count'] + colors.off)         
-                print( colors.Blue + '    Status        :  ' + bReport['status'] + colors.off )
+                # print( colors.Red +  '    NE Type       :  ' + bReport['ne-type'] +colors.off )         
+                print( colors.IRed +  '    NE Type       :  ' + dirs_tocheck[bReport['ne-type']] +colors.off )         
+                print( colors.IGreen +'    File Counts   :  ' + bReport['file-count'] + colors.off)         
+                print( colors.IBlue + '    Status        :  ' + bReport['status'] + colors.off )
                 print('    '  +colors.Blue+ 45*'_' + colors.off+'\n')
         
         print('\n'+15*':'+ colors.Yellow + 'DONE FOR LAST' +colors.off +colors.BYellow +' '+str(day)+' '+ colors.off + colors.Yellow+ 'DAYS !' + colors.off  + 15*':'+'\n')
     except KeyboardInterrupt:
-        print(  '\n    '+ colors.On_IGreen+ "   Checking is terminated, you may try agin! " + colors.off)
+        print(  '\n    '+ colors.On_IGreen+ "   hmmm! It seems something's wrong, You may try agin! " + colors.off)
 
 
 
-# days_input = input("Insert Day   : ")
 run_files=True
 while True:
     try:
-        days_input=raw_input("Insert Day or Hit ENTER for 7 Days  : ")
+        days_input=input("Insert Day or Hit ENTER for 7 Days  : ")
         day=7 if days_input=='' else days_input
         if float( day ) > 0:
             break #ok
@@ -157,9 +153,10 @@ while True:
         print(  '\n    '+ colors.On_IGreen+ "    See you later ! " + colors.off)
         run_files =False
         break
-     
 
-# files(7 if days_input=='' else days_input)
+# if ctl+c in while loop happen, function will not run
 if (run_files) : files(day)
     
  
+
+
