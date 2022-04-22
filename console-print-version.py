@@ -78,7 +78,7 @@ dirs_tocheck={
 def files(day):
     print(day)
     try:
-        # os.chdir('/mnt/shareddisk/sftp/data/nokia')
+        # os.chdir('/home/folder/subfolder')
          
         daycount = time.time()-(float(day)*24*60*60)
         #start checking
