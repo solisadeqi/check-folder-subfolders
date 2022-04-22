@@ -1,4 +1,4 @@
- 
+  
 from genericpath import getmtime
 import time
 import os
@@ -67,7 +67,8 @@ class colors:
     On_ICyan="\033[0;106m"    # Cyan
 
 
-dirs_tocheck={    
+dirs_tocheck={
+    
     'folder1'  :'Folder1 Name',
     'folder2'  :'Folder2 Name',
     'folder3'  :'Folder3 Name',
@@ -77,7 +78,7 @@ dirs_tocheck={
 def files(day):
     print(day)
     try:
-        # os.chdir('/home/target/folder')
+        # os.chdir('/mnt/shareddisk/sftp/data/nokia')
          
         daycount = time.time()-(float(day)*24*60*60)
         #start checking
@@ -153,10 +154,9 @@ while True:
         print(  '\n    '+ colors.On_IGreen+ "    See you later ! " + colors.off)
         run_files =False
         break
+     
 
 # if ctl+c in while loop happen, function will not run
 if (run_files) : files(day)
     
  
-
-
