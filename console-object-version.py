@@ -1,5 +1,5 @@
 # this will return result in object: [{},{},.. ]
- 
+
 from genericpath import getmtime
 import time
 import os
@@ -41,5 +41,4 @@ def files(day=7):
         print(result)
     except Exception as err:
         print(err)
-
 files()
