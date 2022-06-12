@@ -4,13 +4,11 @@ from genericpath import getmtime
 import time
 import os
  
-
 dirs_tocheck={
      'folder1'  :'Folder1 Name',
      'folder2'  :'Folder2 Name',
      'env'  :'env',
 }
-
 
 def files(day=7):
 
