@@ -4,8 +4,6 @@ import time
 import os
 
 
-
-
 class colors: 
   
     # Reset
